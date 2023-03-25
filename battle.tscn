@@ -1,0 +1,183 @@
+[gd_scene load_steps=14 format=3 uid="uid://deatuy1vtcmfr"]
+
+[ext_resource type="Texture2D" uid="uid://c0hgnd8kgldg4" path="res://MobileRPG Resources/Images/Mobile RPG Mockup.png" id="1_crlrc"]
+[ext_resource type="Texture2D" uid="uid://dr21tpy1w1lny" path="res://MobileRPG Resources/Images/Dungeon.png" id="1_kfyh1"]
+[ext_resource type="Script" path="res://battle.gd" id="1_u7xng"]
+[ext_resource type="Script" path="res://PlayerStats.gd" id="2_b18nu"]
+[ext_resource type="PackedScene" uid="uid://de73vbamaqobu" path="res://rat.tscn" id="2_f3spa"]
+[ext_resource type="PackedScene" uid="uid://dbnq5nrd3bhag" path="res://slime.tscn" id="4_y7j8s"]
+[ext_resource type="Script" path="res://StatsPanel.gd" id="6_og2dv"]
+[ext_resource type="PackedScene" uid="uid://b4xxgnmg7vgdm" path="res://sword_action_button.tscn" id="7_x0aya"]
+[ext_resource type="PackedScene" uid="uid://d4hq0fvaxv86e" path="res://heal_action_button.tscn" id="8_i76gx"]
+[ext_resource type="FontVariation" uid="uid://ddm8cvijyteu0" path="res://MobileRPG Resources/DefaultFont.tres" id="8_jy8u7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dclqv"]
+
+[sub_resource type="Animation" id="Animation_t5t54"]
+resource_name = "fade_to_new_room"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2221u"]
+_data = {
+"fade_to_new_room": SubResource("Animation_t5t54")
+}
+
+[node name="Battle" type="Node"]
+script = ExtResource("1_u7xng")
+enemies = Array[PackedScene]([ExtResource("2_f3spa"), ExtResource("4_y7j8s")])
+
+[node name="PlayerStats" type="Node" parent="."]
+script = ExtResource("2_b18nu")
+
+[node name="Dungeon" type="Sprite2D" parent="."]
+position = Vector2(45, 80)
+texture = ExtResource("1_kfyh1")
+
+[node name="EnemyPosition" type="Marker2D" parent="."]
+position = Vector2(49, 36)
+
+[node name="Slime" parent="EnemyPosition" instance=ExtResource("4_y7j8s")]
+damage = 4
+
+[node name="MobileRpgMockup" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.184314)
+position = Vector2(45, 89.5)
+scale = Vector2(1, 1.11875)
+texture = ExtResource("1_crlrc")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 0
+offset_right = 91.0
+offset_bottom = 55.0
+mouse_filter = 2
+
+[node name="NextRoomButton" type="Button" parent="UI/CenterContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 13)
+layout_mode = 2
+text = "NEXT ROOM"
+
+[node name="StatsPanel" type="Panel" parent="UI"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 56.0
+offset_right = 86.0
+offset_bottom = 78.0
+script = ExtResource("6_og2dv")
+
+[node name="StatsContainer" type="HBoxContainer" parent="UI/StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HP" type="Label" parent="UI/StatsPanel/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 5
+text = "HP
+25"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AP" type="Label" parent="UI/StatsPanel/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 5
+text = "AP
+3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MP" type="Label" parent="UI/StatsPanel/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 5
+text = "MP
+10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextBoxPanel" type="Panel" parent="UI"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 155.0
+offset_right = 92.0
+offset_bottom = 180.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/TextBoxPanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 92.0
+offset_bottom = 22.0
+theme_override_colors/default_color = Color(0.360784, 0, 0, 1)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("8_jy8u7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dclqv")
+
+[node name="BattleActionButtons" type="GridContainer" parent="UI"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 81.0
+offset_right = 82.0
+offset_bottom = 151.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 5
+columns = 2
+
+[node name="SwordActionButton" parent="UI/BattleActionButtons" instance=ExtResource("7_x0aya")]
+layout_mode = 2
+
+[node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource("8_i76gx")]
+layout_mode = 2
+
+[node name="Fade" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2221u")
+}
+
+[connection signal="ap_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_ap_changed"]
+[connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_hp_changed"]
+[connection signal="mp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_mp_changed"]
+[connection signal="pressed" from="UI/CenterContainer/NextRoomButton" to="." method="_on_next_room_button_pressed"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbnq5nrd3bhag"]
+
+[ext_resource type="PackedScene" uid="uid://c7lbnuoiaqhxl" path="res://enemy.tscn" id="1_xxovg"]
+[ext_resource type="Texture2D" uid="uid://cjs1imeer83qq" path="res://MobileRPG Resources/Images/Slime.png" id="2_f6or8"]
+[ext_resource type="PackedScene" uid="uid://c4kgce85ueyc6" path="res://hover_info.tscn" id="3_ckp04"]
+
+[node name="Slime" instance=ExtResource("1_xxovg")]
+damage = 2
+hp = 10
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-2, 3)
+texture = ExtResource("2_f6or8")
+
+[node name="HoverInfo" parent="." index="3" instance=ExtResource("3_ckp04")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -25.0
+offset_top = -8.0
+offset_right = 19.0
+offset_bottom = 15.0
+grow_horizontal = 1
+grow_vertical = 1
+description = "A slime"

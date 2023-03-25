@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cxdahsbwn45d1"]
+
+[ext_resource type="Texture2D" uid="uid://bsjkyttpk6ygs" path="res://MobileRPG Resources/Images/Button9SlicePressed.png" id="1_6ucuq"]
+
+[resource]
+texture = ExtResource("1_6ucuq")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0

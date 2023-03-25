@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4xxgnmg7vgdm"]
+
+[ext_resource type="PackedScene" uid="uid://bv7pwmo8qm3x7" path="res://action_button.tscn" id="1_cve25"]
+[ext_resource type="Script" path="res://sword_action_button.gd" id="2_17vab"]
+
+[node name="SwordActionButton" instance=ExtResource("1_cve25")]
+text = "Sword"
+script = ExtResource("2_17vab")
+
+[node name="HoverInfo" parent="." index="0"]
+description = "Your trusty sword, does 4 damage"

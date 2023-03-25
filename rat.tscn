@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://de73vbamaqobu"]
+
+[ext_resource type="PackedScene" uid="uid://c7lbnuoiaqhxl" path="res://enemy.tscn" id="1_pi0fd"]
+[ext_resource type="PackedScene" uid="uid://c4kgce85ueyc6" path="res://hover_info.tscn" id="2_me7r6"]
+
+[node name="Rat" instance=ExtResource("1_pi0fd")]
+damage = 2
+hp = 15
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-2, 3)
+
+[node name="HPLabel" parent="." index="1"]
+text = "15"
+
+[node name="HoverInfo" parent="." index="3" instance=ExtResource("2_me7r6")]
+offset_left = -24.0
+offset_top = -13.0
+offset_right = 21.0
+offset_bottom = 12.0
+description = "A common rat"

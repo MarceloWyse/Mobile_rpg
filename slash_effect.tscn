@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp3bhgjf7uoxu"]
+
+[ext_resource type="Script" path="res://SlashEffect.gd" id="1_j8hs0"]
+[ext_resource type="Texture2D" uid="uid://b150duxtxh8b" path="res://MobileRPG Resources/Images/SlashEffect.png" id="2_c2y63"]
+
+[sub_resource type="Animation" id="Animation_7muye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_i8so1"]
+resource_name = "slash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7gr6k"]
+_data = {
+"RESET": SubResource("Animation_7muye"),
+"slash": SubResource("Animation_i8so1")
+}
+
+[node name="SlashEffect" type="Node2D"]
+script = ExtResource("1_j8hs0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_c2y63")
+hframes = 5
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "slash"
+libraries = {
+"": SubResource("AnimationLibrary_7gr6k")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
